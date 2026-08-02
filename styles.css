@@ -96,9 +96,16 @@ body {
   }
 }
 
-img {
+img,
+video,
+svg {
   max-width: 100%;
   display: block;
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 a {
@@ -942,6 +949,10 @@ html[data-theme='light'] .footer-advanced {
     grid-template-columns: 1fr;
   }
 
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .hero-advanced {
     padding-top: 80px;
   }
@@ -955,17 +966,11 @@ html[data-theme='light'] .footer-advanced {
   }
 }
 
-@media (max-width: 560px) {
-  .hero-badge {
-    padding: 10px 14px;
-  }
-
-  .hero h1 {
-    font-size: 2.75rem;
-  }
-}
-
 @media (max-width: 760px) {
+  .section {
+    padding: 64px 18px;
+  }
+
   .header-inner {
     padding: 18px 18px;
   }
@@ -1033,8 +1038,22 @@ html[data-theme='light'] .footer-advanced {
     padding: 64px 18px;
   }
 
+  .hero h1 {
+    font-size: clamp(2.5rem, 11vw, 3.25rem);
+  }
+
+  .hero-copy {
+    font-size: 1rem;
+  }
+
   .button {
     width: 100%;
+  }
+
+  .services-grid,
+  .gallery-grid,
+  .video-stories-grid {
+    grid-template-columns: 1fr;
   }
 
   .healer-profile-placeholder {
@@ -1045,7 +1064,35 @@ html[data-theme='light'] .footer-advanced {
     margin-top: 0;
   }
 
-  .video-stories-grid {
+  .faq-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand span {
+    letter-spacing: 0.08em;
+  }
+
+  .theme-toggle {
+    padding: 8px 10px;
+  }
+
+  .theme-toggle-text {
+    display: none;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+  }
+
+  .button {
+    padding: 13px 18px;
+    font-size: 0.96rem;
   }
 }

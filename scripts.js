@@ -123,8 +123,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!isValid) {
       statusMessage.textContent = '';
     } else if (isPlaceholderAction) {
-      statusMessage.textContent = 'The contact form is not yet connected to a live submission endpoint. Please use the phone number or Instagram profile listed above.';
-      emailField.setCustomValidity('The contact form is not connected to a live submission endpoint yet.');
+      statusMessage.textContent = '';
+      emailField.setCustomValidity('');
     } else {
       statusMessage.textContent = '';
     }
@@ -136,18 +136,47 @@ window.addEventListener('DOMContentLoaded', () => {
     updateEmailValidationState();
   });
 
-  contactForm?.addEventListener('submit', (event) => {
+  contactForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     if (!emailField || !submitButton) return;
 
     const isReadyToSubmit = updateEmailValidationState();
     if (!isReadyToSubmit) {
-      event.preventDefault();
       emailField.reportValidity();
       emailField.focus();
       return;
     }
 
     emailField.setCustomValidity('');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    const formData = new FormData(contactForm);
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        statusMessage.textContent = 'Thanks! Your message has been submitted successfully.';
+        statusMessage.style.color = '#8bd7c6';
+        contactForm.reset();
+      } else {
+        statusMessage.textContent = 'Something went wrong. Please try again or contact us directly.';
+        statusMessage.style.color = '#ffcf82';
+      }
+    } catch (error) {
+      statusMessage.textContent = 'Something went wrong. Please try again or contact us directly.';
+      statusMessage.style.color = '#ffcf82';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send Message';
+    }
   });
 
   updateEmailValidationState();

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Divine Light Site
 
 Static website for Divine Light.
@@ -16,3 +17,6 @@ Then visit http://localhost:8000.
 2. Push the project to the repository.
 3. In GitHub repository settings, enable Pages and choose the main branch.
 4. Your site will be available at `https://<username>.github.io/<repository>/`.
+=======
+# divine-light
+>>>>>>> 2510c7841469a70e171de59ac682fecbaf66fbd7

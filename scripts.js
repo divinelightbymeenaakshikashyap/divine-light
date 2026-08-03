@@ -105,7 +105,14 @@ window.addEventListener('DOMContentLoaded', () => {
       if (!target) return;
 
       event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const header = document.querySelector('.site-header');
+      const headerOffset = (header?.offsetHeight || 0) + 18;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(targetPosition, 0),
+        behavior: 'smooth',
+      });
     });
   });
 

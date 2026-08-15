@@ -186,5 +186,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  updateEmailValidationState();
+
+ 
+updateEmailValidationState();
+
 });
